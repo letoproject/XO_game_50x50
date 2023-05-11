@@ -1,0 +1,203 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --hue: 10;
+  --accent: var(--hue) 60% 50%;
+  --accentX: #cc4d33;
+  --accentO: #3399cc;
+  --bkg: #fcf9f8;
+  --text: ghostwhite;
+  --gray: dimgray;
+  --header: #5c180a;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  max-height: 100vh;
+  background-color: var(--bkg);
+  color: var(--text);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+ h1 {
+  font-size: 3rem;
+  text-align: center;
+  color: var(--header);
+}
+
+.info {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--accentX);
+  color: var(--text);
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 100vmax;
+}
+
+ section {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  padding: 1rem;
+} 
+
+.main_section {
+  min-height: 100%;
+  grid-area: main;
+}
+
+.score_section {
+  width: 300px;
+  grid-area: score;
+} 
+
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(50, 1fr);
+  gap: 5px;
+  max-width: 95vw;
+}
+
+.cell {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.cellX {
+  background-color: var(--accentX);
+}
+
+.cellO {
+  background-color: var(--accentO);
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.table {
+  width: 300px;
+}
+
+.table_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.table_header_item,
+.table_score_item {
+  font-size: 1rem;
+  font-weight: bold;
+   color: var(--text); 
+  padding: 0.5rem 1rem;
+  border-radius: 100vmax;
+}
+
+.table_score {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* modal */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+
+.modal.is-open {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.modal_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  background-image: url("https://janschreiber.github.io/img2/black-chalk.jpg");
+}
+
+.modal_button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--animation-duration) var(--timing-function);
+  outline: none;
+  background-image: url('./images/icon-close.svg');
+  background-color: rgba(0, 0, 0, .5);
+  background-position: center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+}
+
+.modal_button:hover,
+.modal_button:focus {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.restart_button,
+.reset_button {
+  display: inline-block;
+  width: 50%;
+  margin-bottom: 15px;
+  cursor: pointer;
+  border-color: transparent;
+  border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.restart_button:hover,
+.reset_button:hover,
+.restart_button:focus,
+.reset_button:focus {
+  color: var(--text);
+  background-color: var(--gray);
+}
